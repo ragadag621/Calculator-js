@@ -22,18 +22,18 @@ let shouldClear = false;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        currentNumber += button.innerText
         const value = button.textContent.trim();
 
-        if(!/^[0-9+\-*/.]$/.test(value)) {
+        if(!/^[0-9.]$/.test(value)) {
             return;
         }
+
+        currentNumber += value
 
         if(shouldClear) {
             display.value = '';
             shouldClear = false;
         }
-
 
         if (display.value === "0") {
             display.value = value;
