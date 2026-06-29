@@ -3,27 +3,83 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('button');
 const operators = document.querySelectorAll('.operator');
-const clear = document.querySelector('.clear');
+const clearButton = document.querySelector('.clear');
 const equalButton = document.querySelector('.equal');
-const backspace = document.querySelector('.back');
+const backButton = document.querySelector('.back');
 
+
+// Set initial display value
+display.value = 0;
+
+
+// Event listeners for buttons
+let shouldClear = false;
 
 buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    display.value += button.innerText
-  })
-})
+    button.addEventListener('click', () => {
 
-const clear = () => {
-  display.value = ""
+        const value = button.textContent.trim();
+
+        if(!/^[0-9+\-*/.]$/.test(value)) {
+            return;
+        }
+
+        if(shouldClear) {
+            display.value = '';
+            shouldClear = false;
+        }
+
+
+        if (display.value === "0") {
+            display.value = value;
+        } else {
+            display.value += value;
+        }
+    });
+});
+
+
+// Event listeners for operators
+operators.forEach(operator => {
+    operator.addEventListener('click', () => {
+        const op = operator.textContent.trim();
+        const lastChar = display.value.slice(-1);
+
+        if(shouldClear)  shouldClear = false;
+
+        if (['+', '-', '*', '/'].includes(lastChar)) {
+            display.value = display.value.slice(0, -1) + op;
+        } else {
+            display.value += op;
+        }
+    });
+});
+
+
+// Event listener for Clear [C] button
+if (clearButton) {
+    clearButton.addEventListener('click', () => {
+        display.value = '0';
+        shouldClear = true;
+    });
 }
 
-const backspace = () => {
-  display.value = display.value.slice(0, -1)
+// Event listener for back button [<--] button
+
+if (backButton) {
+    backButton.addEventListener('click', () => {
+        display.value = display.value.slice(0, -1);
+    });
 }
 
-const equal = () => {
-  display.value = operate(display.value)
+// Event listener for equal button [=] button
+
+if (equalButton) {
+    equalButton.addEventListener('click', () => {
+        const result = operate(number1, number2, operator);
+        display.value = result;
+        shouldClear = true;
+    });
 }
 
 
@@ -32,6 +88,11 @@ const equal = () => {
 
 let calc_list = []
 let currentNumber = ""
+
+number1 = Number(prompt("Insert the first number:")) // for testing in the console, uncommnent if not needed and we delete at the end of the assignment
+number2 = Number(prompt("Insert the second number:"))
+operator = prompt("insert the operator:")
+
 
 // Basic arithmetic functions
 const add = (a, b) => a + b
@@ -74,18 +135,6 @@ const operate = (number1, number2, operator) => {
 }
 
 
-function joiningCalculations(calc_list){
-    let result = calc_list[0]
-
-    for(let i = 1; i < calc_list.length; i += 2){
-        let operator = calc_list[i]
-        let number = calc_list[i + 1]
-        result = operate(result, number, operator)
-    }
-    return result 
-}
-
-
 function expect(actual) {
   return {
     toBe: (expected) => {
@@ -97,7 +146,6 @@ function expect(actual) {
     },
   }
 }
-
 
 // --- Unit Tests ---
 console.log("--- Running Unit Tests ---")
