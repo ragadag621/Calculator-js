@@ -1,3 +1,35 @@
+//DOM and it required corresponding functions
+
+const display = document.getElementById('display');
+const buttons = document.querySelectorAll('button');
+const operators = document.querySelectorAll('.operator');
+const clearButton = document.querySelector('.clear');
+const equalButton = document.querySelector('.equal');
+const backButton = document.querySelector('.back');
+
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    display.value += button.innerText
+  })
+})
+
+const clear = () => {
+  display.value = ""
+}
+
+const backspace = () => {
+  display.value = display.value.slice(0, -1)
+}
+
+const equal = () => {
+  display.value = operate(display.value)
+}
+
+
+
+
+
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
 const multiply = (a, b) => a * b
