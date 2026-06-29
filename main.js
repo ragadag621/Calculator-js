@@ -47,18 +47,16 @@ buttons.forEach((button) => {
 // Event listeners for operators
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        const op = operator.textContent.trim();
-        const lastChar = display.value.slice(-1);
-        calc_list.push(Number(currentNumber))  
-        calc_list.push(operator.textContent)     
+        calc_list.push(Number(currentNumber))
+        calc_list.push(operator.textContent.trim())
         currentNumber = ""
 
-        if(shouldClear)  shouldClear = false;
-
-        if (['+', '-', '*', '/'].includes(lastChar)) {
-            display.value = display.value.slice(0, -1) + op;
+        if(calc_list.length > 2) {
+            let tempList = calc_list.slice(0, -1)
+            let intermediateResult = joiningCalculations(tempList)
+            display.value = intermediateResult + operator.textContent.trim() // show result + operator
         } else {
-            display.value += op;
+            display.value += operator.textContent.trim() // first operator, just append
         }
     });
 });
@@ -120,15 +118,21 @@ const operate = (number1, number2, operator) => {
     return validationResult
   }
 
+  let result
+
   switch (operator) {
     case "+":
-      return add(number1, number2)
+     result = add(number1, number2)
+     return result.toFixed(3)
     case "-":
-      return subtract(number1, number2)
+      result = subtract(number1, number2)
+      return result.toFixed(3)
     case "*":
-      return multiply(number1, number2)
+      result = multiply(number1, number2)
+      return result.toFixed(3)
     case "/":
-      return divide(number1, number2)
+      result = divide(number1, number2)
+      return result.toFixed(3)
   }
 }
 
