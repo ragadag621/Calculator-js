@@ -11,6 +11,7 @@ const operators = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('.clear');
 const equalButton = document.querySelector('.equal');
 const backButton = document.querySelector('.back');
+const decimalButton = document.querySelector('.decimal')
 
 
 // Set initial display value
@@ -90,6 +91,18 @@ if (equalButton) {
         shouldClear = true;
     });
 }
+
+if(decimalButton)
+{
+  decimalButton.addEventListener('click', () => 
+  {
+    if(!display.value.includes('.'));
+    {
+      display.value += '.';
+    }
+  });
+}
+
 // Basic arithmetic functions
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
