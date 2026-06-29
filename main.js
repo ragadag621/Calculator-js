@@ -1,3 +1,8 @@
+// Global Variables
+let calc_list = [] // need this list to join the calculations
+let currentNumber = "" //the joinCalculations function is going to push the current number on the list
+
+
 //DOM and it required corresponding functions
 
 const display = document.getElementById('display');
@@ -17,7 +22,7 @@ let shouldClear = false;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-
+        currentNumber += button.innerText
         const value = button.textContent.trim();
 
         if(!/^[0-9+\-*/.]$/.test(value)) {
@@ -44,6 +49,9 @@ operators.forEach(operator => {
     operator.addEventListener('click', () => {
         const op = operator.textContent.trim();
         const lastChar = display.value.slice(-1);
+        calc_list.push(Number(currentNumber))  
+        calc_list.push(operator.textContent)     
+        currentNumber = ""
 
         if(shouldClear)  shouldClear = false;
 
@@ -76,24 +84,14 @@ if (backButton) {
 
 if (equalButton) {
     equalButton.addEventListener('click', () => {
-        const result = operate(number1, number2, operator);
-        display.value = result;
+        calc_list.push(Number(currentNumber))       
+        let result = joiningCalculations(calc_list)    
+        display.value = result
+        calc_list = []                              
+        currentNumber = ""
         shouldClear = true;
     });
 }
-
-
-
-
-
-let calc_list = []
-let currentNumber = ""
-
-number1 = Number(prompt("Insert the first number:")) // for testing in the console, uncommnent if not needed and we delete at the end of the assignment
-number2 = Number(prompt("Insert the second number:"))
-operator = prompt("insert the operator:")
-
-
 // Basic arithmetic functions
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
@@ -134,6 +132,16 @@ const operate = (number1, number2, operator) => {
   }
 }
 
+function joiningCalculations(calc_list){
+    let result = calc_list[0]
+
+    for(let i = 1; i < calc_list.length; i += 2){
+        let operator = calc_list[i]
+        let number = calc_list[i + 1]
+        result = operate(result, number, operator)
+    }
+    return result 
+}
 
 function expect(actual) {
   return {
