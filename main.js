@@ -1,7 +1,7 @@
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => b === 0 ? " Error!" : a / b;
+const add = (a, b) => a + b
+const subtract = (a, b) => a - b
+const multiply = (a, b) => a * b
+const divide = (a, b) => (a / b)
 
 // console.log(add(2, 3))
 
@@ -11,21 +11,36 @@ const divide = (a, b) => b === 0 ? " Error!" : a / b;
 
 // console.log(divide(8, 0))
 
-function operate(number1, number2, operator) {
+const errorHandler = (message) => {
+  return alert("Error:" + message)
 
-    switch (operator) {
-        case "+":
-            return add(number1, number2)
-            break
-        case "-":
-            return subtract(number1, number2)
-            break
-        case "*":
-            return multiply(number1, number2)
-            break
-        case "/":
-            return divide(number1, number2)
-            break
-    }
-
+  return null
 }
+
+const isValidInput = (operator, number1, number2) => {
+  if (isNaN(number1) || isNaN(number2)) {
+    return errorHandler("invalide  input!Enter a number please")
+  }
+  if (operator === "/" && number2 == 0) {
+    return errorHandler("divide on zero")
+  }
+  return true
+}
+
+const operate = (number1, number2, operator) => {
+    const validationResult = isValidInput(operator, number1, number2);
+    if(validationResult!== true){
+        return validationResult;
+    }
+  switch (operator) {
+    case "+":
+      return add(number1, number2)
+    case "-":
+      return subtract(number1, number2)
+    case "*":
+      return multiply(number1, number2)
+    case "/":
+      return divide(number1, number2)
+  }
+}
+console.log(operate(1,0,"/"))
