@@ -30,28 +30,29 @@ const equal = () => {
 
 
 
+let calc_list = []
+let currentNumber = ""
+
+number1 = Number(prompt("Insert the first number:")) // for testing in the console, uncommnent if not needed and we delete at the end of the assignment
+number2 = Number(prompt("Insert the second number:"))
+operator = prompt("insert the operator:")
+
+
+// Basic arithmetic functions
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
 const multiply = (a, b) => a * b
-const divide = (a, b) => (a / b)
+const divide = (a, b) => (b === 0 ? "Error!" : a / b)
 
-// console.log(add(2, 3))
-
-// console.log(subtract(4, 8))
-
-// console.log(multiply(4, 8))
-
-// console.log(divide(8, 0))
 
 const errorHandler = (message) => {
-  return alert("Error:" + message)
-
-  return null
+  return message
 }
+
 
 const isValidInput = (operator, number1, number2) => {
   if (isNaN(number1) || isNaN(number2)) {
-    return errorHandler("invalide  input!Enter a number please")
+    return errorHandler("Invalid Input! Enter a number please")
   }
   if (operator === "/" && number2 == 0) {
     return errorHandler("divide on zero")
@@ -60,10 +61,11 @@ const isValidInput = (operator, number1, number2) => {
 }
 
 const operate = (number1, number2, operator) => {
-    const validationResult = isValidInput(operator, number1, number2);
-    if(validationResult!== true){
-        return validationResult;
-    }
+  const validationResult = isValidInput(operator, number1, number2)
+  if (validationResult !== true) {
+    return validationResult
+  }
+
   switch (operator) {
     case "+":
       return add(number1, number2)
@@ -75,4 +77,27 @@ const operate = (number1, number2, operator) => {
       return divide(number1, number2)
   }
 }
-console.log(operate(1,0,"/"))
+
+
+function expect(actual) {
+  return {
+    toBe: (expected) => {
+      if (actual === expected) {
+        console.log(`✅ Passed: Expected ${expected}`)
+      } else {
+        console.error(`❌ Failed: Expected ${expected}, but got ${actual}`)
+      }
+    },
+  }
+}
+
+// --- Unit Tests ---
+console.log("--- Running Unit Tests ---")
+
+expect(add(2, 3)).toBe(5)
+expect(subtract(10, 5)).toBe(5)
+expect(divide(10, 2)).toBe(5)
+expect(divide(5, 0)).toBe("Error!")
+expect(isValidInput("+", 2, "a")).toBe("Invalid Input! Enter a number please")
+
+console.log("--- Tests Completed ---")
