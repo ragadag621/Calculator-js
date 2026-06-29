@@ -3,9 +3,9 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('button');
 const operators = document.querySelectorAll('.operator');
-const clearButton = document.querySelector('.clear');
+const clear = document.querySelector('.clear');
 const equalButton = document.querySelector('.equal');
-const backButton = document.querySelector('.back');
+const backspace = document.querySelector('.back');
 
 
 buttons.forEach((button) => {
