@@ -6,28 +6,21 @@ number2 = Number(prompt("Insert the second number:"))
 operator = prompt("insert the operator:")
 
 
+// Basic arithmetic functions
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
 const multiply = (a, b) => a * b
-const divide = (a, b) => (a / b)
+const divide = (a, b) => (b === 0 ? "Error!" : a / b)
 
-// console.log(add(2, 3))
-
-// console.log(subtract(4, 8))
-
-// console.log(multiply(4, 8))
-
-// console.log(divide(8, 0))
 
 const errorHandler = (message) => {
-  return alert("Error:" + message)
-
-  return null
+  return message
 }
+
 
 const isValidInput = (operator, number1, number2) => {
   if (isNaN(number1) || isNaN(number2)) {
-    return errorHandler("invalide  input!Enter a number please")
+    return errorHandler("Invalid Input! Enter a number please")
   }
   if (operator === "/" && number2 == 0) {
     return errorHandler("divide on zero")
@@ -36,10 +29,11 @@ const isValidInput = (operator, number1, number2) => {
 }
 
 const operate = (number1, number2, operator) => {
-    const validationResult = isValidInput(operator, number1, number2);
-    if(validationResult!== true){
-        return validationResult;
-    }
+  const validationResult = isValidInput(operator, number1, number2)
+  if (validationResult !== true) {
+    return validationResult
+  }
+
   switch (operator) {
     case "+":
       return add(number1, number2)
@@ -52,17 +46,26 @@ const operate = (number1, number2, operator) => {
   }
 }
 
-function joiningCalculations(calc_list){
-    let result = calc_list[0]
 
-    for(let i = 1; i < calc_list.length; i += 2){
-        let operator = calc_list[i]
-        let number = calc_list[i + 1]
-        result = operate(result,number,operator)
-    }
-
-    return result
+function expect(actual) {
+  return {
+    toBe: (expected) => {
+      if (actual === expected) {
+        console.log(`✅ Passed: Expected ${expected}`)
+      } else {
+        console.error(`❌ Failed: Expected ${expected}, but got ${actual}`)
+      }
+    },
+  }
 }
 
-calc_list = [Number(number1), operator, Number(number2)]
-console.log(joiningCalculations(calc_list))
+// --- Unit Tests ---
+console.log("--- Running Unit Tests ---")
+
+expect(add(2, 3)).toBe(5)
+expect(subtract(10, 5)).toBe(5)
+expect(divide(10, 2)).toBe(5)
+expect(divide(5, 0)).toBe("Error!")
+expect(isValidInput("+", 2, "a")).toBe("Invalid Input! Enter a number please")
+
+console.log("--- Tests Completed ---")
