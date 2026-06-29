@@ -1,3 +1,11 @@
+let calc_list = []
+let currentNumber = ""
+
+number1 = Number(prompt("Insert the first number:")) // for testing in the console, uncommnent if not needed and we delete at the end of the assignment
+number2 = Number(prompt("Insert the second number:"))
+operator = prompt("insert the operator:")
+
+
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
 const multiply = (a, b) => a * b
@@ -43,4 +51,18 @@ const operate = (number1, number2, operator) => {
       return divide(number1, number2)
   }
 }
-console.log(operate(1,0,"/"))
+
+function joiningCalculations(calc_list){
+    let result = calc_list[0]
+
+    for(let i = 1; i < calc_list.length; i += 2){
+        let operator = calc_list[i]
+        let number = calc_list[i + 1]
+        result = operate(result,number,operator)
+    }
+
+    return result
+}
+
+calc_list = [Number(number1), operator, Number(number2)]
+console.log(joiningCalculations(calc_list))
