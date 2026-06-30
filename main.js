@@ -66,6 +66,7 @@ document.addEventListener('keydown', (e) => {
     }
 
     if (['+', '-', '×', '÷'].includes(key)) {
+    if (['+', '-', 'x', '÷'].includes(key)) {
         const currentValue = Number(display.value);
         if (pendingOperator === null) {
             previousValue = currentValue;
