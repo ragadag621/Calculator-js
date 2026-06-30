@@ -1,4 +1,4 @@
-
+(function() {
 // =======================
 // Global State
 // =======================
@@ -287,3 +287,4 @@ document.addEventListener("keydown", (e) => {
     if (key === "*") document.querySelectorAll(".operator")[1].click();
     if (key === "/") document.querySelectorAll(".operator")[0].click();
 });
+})()
