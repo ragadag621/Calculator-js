@@ -12,6 +12,8 @@ const clearButton = document.querySelector('.clear');
 const equalButton = document.querySelector('.equal');
 const backButton = document.querySelector('.back');
 const decimalButton = document.querySelector('.decimal')
+const signButton = document.querySelector(".sign")
+const percentButton = document.querySelector(".percent")
 
 
 // Set initial display value
