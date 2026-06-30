@@ -1,65 +1,267 @@
-    body{
-        align-content: center;
-        justify-content: center;
-        text-align: center;
-    }
-      
-    div.keypad{
+/*=============================
+      Theme Variables
+=============================*/
 
-   display: grid;
-    border: 4px solid brown;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(6, 1fr); /* More rows for all buttons */
-    gap: 10px;
+:root{
+    --bg:#fefefe;
+    --calculator:#b0adad77;
+    --display:#fcfcfc;
 
-    width: 300px;
-    padding: 20px;
-    margin: 15% auto;
+    --text:#1f2937;
+    --button:#f7f8f9;
+    --button-hover:#87878aa2;
 
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    --operator:#3b82f6;
+    --operator-hover:#2563eb;
 
-    }
+    --equal:#10b981;
+    --equal-hover:#059669;
 
-    #display {
-    grid-column: span 4;
-    height: 60px;
-    padding: 10px;
+    --clear:#ef4444;
+    --clear-hover:#dc2626;
 
-    font-size: 24px;
-    text-align: right;
-
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    outline: none;
-    background: #f7f7f7;
-    }
-
-
-    .keypad button {
-    width: 60px;
-    height: 60px;
-    font-size: 20px;
-    border: none;
-    color:blue;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #eee;
-    transition: 0.2s;
+    --shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
-.keypad button:hover {
-    background-color: #ddd;
-    
+
+body.dark{
+
+    --bg:#0f172a;
+    --calculator:#1e293b;
+    --display:#0b1220;
+
+    --text:#f8fafc;
+
+    --button:#334155;
+    --button-hover:#475569;
+
+    --operator:#818cf8;
+    --operator-hover:#6366f1;
+
+    --equal:#22c55e;
+    --equal-hover:#16a34a;
+
+    --clear:#f87171;
+    --clear-hover:#ef4444;
+
+    --shadow:0 20px 50px rgba(0,0,0,.45);
 }
 
-.keypad button.operator{
-             color:green;
+/*=============================
+      Body
+=============================*/
+
+body{
+
+    margin:0;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,var(--bg),#dbeafe);
+
+    font-family:Arial;
+
+    transition:.4s;
 }
 
-.keypad button.clear{
-             color:red;
+/*=============================
+      Theme Button
+=============================*/
+
+.theme-toggle{
+
+    position:fixed;
+
+    top:25px;
+    right:25px;
+
+    width:55px;
+    height:55px;
+
+    border:none;
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    background:var(--calculator);
+
+    color:var(--text);
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
 
 }
 
+.theme-toggle:hover{
+
+    transform:rotate(20deg) scale(1.05);
+
+}
+
+/*=============================
+      Calculator
+=============================*/
+
+.keypad{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+
+    width:360px;
+
+    padding:25px;
+
+    background:var(--calculator);
+
+    border-radius:22px;
+
+    box-shadow:var(--shadow);
+
+    transition:.4s;
+
+}
+
+/*=============================
+      Display
+=============================*/
+
+#display{
+
+    grid-column:span 4;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:var(--display);
+
+    color:var(--text);
+
+    font-size:34px;
+
+    text-align:right;
+
+    padding-right:20px;
+
+    outline:none;
+
+}
+
+/*=============================
+      Buttons
+=============================*/
+
+.keypad button{
+
+    height:65px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    background:var(--button);
+
+    color:var(--text);
+
+    transition:.2s;
+
+}
+
+.keypad button:hover{
+
+    background:var(--button-hover);
+
+    transform:translateY(-3px);
+
+}
+
+.keypad button:active{
+
+    transform:scale(.95);
+
+}
+
+/*=============================
+      Operators
+=============================*/
+
+.operator{
+
+    background:var(--operator)!important;
+
+    color:white!important;
+
+}
+
+.operator:hover{
+
+    background:var(--operator-hover)!important;
+
+}
+
+/*=============================
+      Equal
+=============================*/
+
+.equal{
+
+    background:var(--equal)!important;
+
+    color:white!important;
+
+}
+
+.equal:hover{
+
+    background:var(--equal-hover)!important;
+
+}
+
+/*=============================
+      Clear
+=============================*/
+
+.clear{
+
+    background:var(--clear)!important;
+
+    color:white!important;
+
+}
+
+.clear:hover{
+
+    background:var(--clear-hover)!important;
+
+}
+
+/*=============================
+      Responsive
+=============================*/
+
+@media(max-width:500px){
+
+.keypad{
+
+    width:90%;
+
+}
+
+}
