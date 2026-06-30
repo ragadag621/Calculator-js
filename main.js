@@ -12,7 +12,7 @@ const clearButton = document.querySelector('.clear');
 const equalButton = document.querySelector('.equal');
 const backButton = document.querySelector('.back');
 const decimalButton = document.querySelector('.decimal')
-const signButton = document.querySelector(".sign")
+const negative = document.querySelector(".sign")
 const percentButton = document.querySelector(".percent")
 
 
@@ -141,17 +141,19 @@ if (equalButton) {
     });
 }
 
-if (signButton) {
-  signButton.addEventListener("click", () => {
-    if (!display.value == "0" || !display.value == null) {
-      result = Number(display.value) * -1
-      display.value = result
-    }
-    else{
-        display.value
-    }
-  })
+if (negative) {
+    negative.addEventListener('click', () => {
+        if (shouldClear) {
+            display.value = '-0';
+            shouldClear = false;
+        } else if (display.value === '0') {
+            display.value = '-0';
+        } else {
+            display.value = (Number(display.value) * -1).toString();
+        }
+    });
 }
+
 
 if (percentButton) {
   percentButton.addEventListener("click", () => {
