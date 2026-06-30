@@ -83,12 +83,12 @@ operators.forEach((op) => {
 
             let result = joiningCalculations(temp);
 
-            display.value = result + op.textContent;
+            display.value = result;
 
             calc_list = [Number(result), op.textContent];
 
         } else {
-            display.value += op.textContent;
+            // display.value += op.textContent;
         }
 
         shouldClear = true;
