@@ -93,7 +93,7 @@ document.addEventListener('keydown', (e) => {
         clearButton?.click();
         return;
     }
-});
+};
 
 // Event listeners for operators
 operators.forEach(operator => {
