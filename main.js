@@ -235,7 +235,7 @@ function operate(a, b, op) {
 
     if (typeof result === "string") return result;
 
-    return Number(result.toFixed(10));
+    return Number(result);
 }
 
 // =======================
