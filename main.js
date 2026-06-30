@@ -239,3 +239,18 @@ expect(divide(5, 0)).toBe("Error!")
 expect(isValidInput("+", 2, "a")).toBe("Invalid Input! Enter a number please")
 
 console.log("--- Tests Completed ---")
+
+
+
+//------------------------------------------
+const themeButton = document.querySelector(".theme-toggle");
+
+themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        themeButton.textContent = "☀️";
+    } else {
+        themeButton.textContent = "🌙";
+    }
+});
