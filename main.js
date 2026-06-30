@@ -61,7 +61,7 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    if (['+', '-', '*', '/'].includes(key)) {
+    if (['+', '-', '×', '/'].includes(key)) {
         const currentValue = Number(display.value);
         if (pendingOperator === null) {
             previousValue = currentValue;
@@ -172,7 +172,7 @@ const isValidInput = (operator, number1, number2) => {
   if (isNaN(number1) || isNaN(number2)) {
     return errorHandler("Invalid Input! Enter a number please")
   }
-  if (operator === "/" && number2 == 0) {
+  if (operator === "÷" && number2 == 0) {
     return errorHandler("divide on zero")
   }
   return true
@@ -193,10 +193,10 @@ const operate = (number1, number2, operator) => {
     case "-":
       result = subtract(number1, number2)
       return result.toFixed(3)
-    case "*":
+    case "×":
       result = multiply(number1, number2)
       return result.toFixed(3)
-    case "/":
+    case "÷":
       result = divide(number1, number2)
       return result.toFixed(3)
   }
