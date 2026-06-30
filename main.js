@@ -42,6 +42,7 @@ buttons.forEach((button) => {
         } else{
             display.value += value;
         }
+        currentNumber += value 
     });
 });
 
@@ -50,7 +51,10 @@ document.addEventListener('keydown', (e) => {
 
     if (/^[0-9.]$/.test(key)) {
         // reuse your number/decimal logic
+        e.preventDefault()
         if (key === '.' && !shouldClear && display.value.includes('.')) return;
+
+        currentNumber += key
 
         if (shouldClear || display.value === "0") {
             display.value = (key === ".") ? "0." : key;
@@ -61,7 +65,7 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    if (['+', '-', '×', '/'].includes(key)) {
+    if (['+', '-', '×', '÷'].includes(key)) {
         const currentValue = Number(display.value);
         if (pendingOperator === null) {
             previousValue = currentValue;
@@ -89,7 +93,6 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 });
-
 
 // Event listeners for operators
 operators.forEach(operator => {
@@ -140,9 +143,12 @@ if (equalButton) {
 
 if (signButton) {
   signButton.addEventListener("click", () => {
-    if (display.value !== "0" || !display.value == null) {
+    if (!display.value == "0" || !display.value == null) {
       result = Number(display.value) * -1
       display.value = result
+    }
+    else{
+        display.value
     }
   })
 }
@@ -155,7 +161,6 @@ if (percentButton) {
     }
   })
 }
-
 // Basic arithmetic functions
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
@@ -189,16 +194,16 @@ const operate = (number1, number2, operator) => {
   switch (operator) {
     case "+":
      result = add(number1, number2)
-     return result.toFixed(3)
+     return result
     case "-":
       result = subtract(number1, number2)
-      return result.toFixed(3)
+      return result
     case "×":
       result = multiply(number1, number2)
-      return result.toFixed(3)
+      return result
     case "÷":
       result = divide(number1, number2)
-      return result.toFixed(3)
+      return result
   }
 }
 
