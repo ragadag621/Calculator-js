@@ -138,8 +138,8 @@ if (equalButton) {
     });
 }
 
-if (signbutton) {
-  signbutton.addEventListener("click", () => {
+if (signButton) {
+  signButton.addEventListener("click", () => {
     if (display.value !== "0" || !display.value == null) {
       result = Number(display.value) * -1
       display.value = result
@@ -147,8 +147,8 @@ if (signbutton) {
   })
 }
 
-if (percentbutton) {
-  percentbutton.addEventListener("click", () => {
+if (percentButton) {
+  percentButton.addEventListener("click", () => {
     if (!display.value == "0" || !display.value == null) {
       result = Number(display.value) / 100
       display.value = result
