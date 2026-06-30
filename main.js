@@ -110,7 +110,7 @@ equalButton.addEventListener("click", () => {
     display.value = result;
 
     calc_list = [];
-    currentNumber = "";
+    currentNumber = String(result);
     shouldClear = true;
 });
 
