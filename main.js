@@ -106,12 +106,9 @@ if (equalButton) {
 
 if (signbutton) {
   signbutton.addEventListener("click", () => {
-    if (!display.value == "0" || !display.value == null) {
+    if (display.value !== "0" || !display.value == null) {
       result = Number(display.value) * -1
       display.value = result
-    }
-    else{
-        display.value
     }
   })
 }
