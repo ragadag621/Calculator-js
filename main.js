@@ -29,6 +29,18 @@ buttons.forEach((button) => {
             return;
         }
 
+         if (value === '.'&& !shouldClear && display.value.includes('.')) {
+            return;
+        }
+
+
+        if(shouldClear || display.value === "0") {
+            display.value = (value === "." )? "0." : value;
+            shouldClear = false;
+        } else{
+            display.value += value;
+        }
+
         currentNumber += value
 
         if(shouldClear) {
@@ -92,15 +104,25 @@ if (equalButton) {
     });
 }
 
-if(decimalButton)
-{
-  decimalButton.addEventListener('click', () => 
-  {
-    if(!display.value.includes('.'));
-    {
-      display.value += '.';
+if (signbutton) {
+  signbutton.addEventListener("click", () => {
+    if (!display.value == "0"  !display.value == null) {
+      result = Number(display.value) * -1
+      display.value = result
     }
-  });
+    else{
+        display.value
+    }
+  })
+}
+
+if (percentbutton) {
+  percentbutton.addEventListener("click", () => {
+    if (!display.value == "0"  !display.value == null) {
+      result = Number(display.value) / 100
+      display.value = result
+    }
+  })
 }
 
 // Basic arithmetic functions
