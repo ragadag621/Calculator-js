@@ -97,16 +97,15 @@ document.addEventListener('keydown', (e) => {
 // Event listeners for operators
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        calc_list.push(Number(currentNumber))
+        calc_list.push(Number(display.value.split(/[+\-×÷]/).pop()))
         calc_list.push(operator.textContent.trim())
-        currentNumber = ""
 
         if(calc_list.length > 2) {
             let tempList = calc_list.slice(0, -1)
             let intermediateResult = joiningCalculations(tempList)
-            display.value = intermediateResult + operator.textContent.trim() // show result + operator
+            display.value = intermediateResult + operator.textContent.trim()
         } else {
-            display.value += operator.textContent.trim() // first operator, just append
+            display.value += operator.textContent.trim()
         }
     });
 });
@@ -132,11 +131,10 @@ if (backButton) {
 
 if (equalButton) {
     equalButton.addEventListener('click', () => {
-        calc_list.push(Number(currentNumber))       
-        let result = joiningCalculations(calc_list)    
+        calc_list.push(Number(display.value.split(/[+\-×÷]/).pop()))
+        let result = joiningCalculations(calc_list)
         display.value = result
-        calc_list = []                              
-        currentNumber = ""
+        calc_list = []
         shouldClear = true;
     });
 }
