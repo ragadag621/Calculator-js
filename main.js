@@ -31,10 +31,10 @@ buttons.forEach((button) => {
             return;
         }
 
-         if (value === '.'&& !shouldClear && display.value.includes('.')) {
+    // Prevent multiple decimal points
+        if (value === '.'&& !shouldClear && display.value.includes('.')) {
             return;
         }
-
 
         if(shouldClear || display.value === "0") {
             display.value = (value === "." )? "0." : value;
@@ -42,20 +42,52 @@ buttons.forEach((button) => {
         } else{
             display.value += value;
         }
-
-        currentNumber += value
-
-        if(shouldClear) {
-            display.value = '';
-            shouldClear = false;
-        }
-
-        if (display.value === "0") {
-            display.value = value;
-        } else {
-            display.value += value;
-        }
     });
+});
+
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+
+    if (/^[0-9.]$/.test(key)) {
+        // reuse your number/decimal logic
+        if (key === '.' && !shouldClear && display.value.includes('.')) return;
+
+        if (shouldClear || display.value === "0") {
+            display.value = (key === ".") ? "0." : key;
+            shouldClear = false;
+        } else {
+            display.value += key;
+        }
+        return;
+    }
+
+    if (['+', '-', '*', '/'].includes(key)) {
+        const currentValue = Number(display.value);
+        if (pendingOperator === null) {
+            previousValue = currentValue;
+        } else {
+            previousValue = operate(previousValue, currentValue, pendingOperator);
+            display.value = previousValue;
+        }
+        pendingOperator = key;
+        shouldClear = true;
+        return;
+    }
+
+    if (key === 'Enter' || key === '=') {
+        equalButton?.click();
+        return;
+    }
+
+    if (key === 'Backspace') {
+        backButton?.click();
+        return;
+    }
+
+    if (key === 'Escape') {
+        clearButton?.click();
+        return;
+    }
 });
 
 
